@@ -1,0 +1,17 @@
+{
+    "dog1": {
+        "breed":"Terrier",
+        "image":"https://images.dog.ceo/breeds/terrier-dandie/n02096437_3655.jpg"},
+    "dog2": {
+        "breed":"Greyhound",
+        "image":"https://images.dog.ceo/breeds/greyhound-italian/n02091032_1457.jpg"},
+    "dog3": {
+        "breed":"Wolfhound",
+        "image":"https://images.dog.ceo/breeds/wolfhound-irish/n02090721_1527.jpg"},
+    "dog4": {
+        "breed":"Husky",
+        "image":"https://images.dog.ceo/breeds/husky/n02110185_13423.jpg"},
+    "dog5": {
+        "breed":"Bouvier",
+        "image":"https://images.dog.ceo/breeds/bouvier/n02106382_952.jpg"},
+}

@@ -1,0 +1,38 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "# Objects\r\n[Source: JavaScript Objects](https://www.w3schools.com/js/js_object_definition.asp)\r\n\r\n## Description\r\nObjects are the way to abstract standalone data with hierachy. They are templates of a platonic idea.\r\n\r\n* Booleans can be objects (if defined with the new keyword)\r\n* Numbers can be objects (if defined with the new keyword)\r\n* Strings can be objects (if defined with the new keyword)\r\n* Dates are always objects\r\n* Maths are always objects\r\n* Regular expressions are always objects\r\n* Arrays are always objects\r\n* Functions are always objects\r\n* Objects are always objects"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "let person = {\r\n    \"name\":\"John\",\r\n    \"age\":30\r\n}\r\nconsole.log(person.name);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "John",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "markdown",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        }
+    ]
+}
