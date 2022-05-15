@@ -13,3 +13,5 @@
 * [React JS bootcamp 8h](https://youtu.be/6Jfk8ic3KVk)
 * [Unpack](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 * [50+ Project Ideas For JavaScript Learners, From Beginner To Advanced!](https://twitter.com/Amit_T18/status/1525069603944034304?s=20&t=fqf9rynt9jsXM1bE-F7w8w)
+
+# Day 2

@@ -1,0 +1,177 @@
+{
+    "cells": [
+        {
+            "language": "javascript",
+            "source": [
+                "person = {\r\n    name:\"Alf\",\r\n    aname:\"M\"\r\n}\r\n\r\na=Object.entries(person)\r\na\r\n"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "[",
+                                "  [",
+                                "    \u001b[32m'name'\u001b[39m,",
+                                "    \u001b[32m'Alf'\u001b[39m",
+                                "  ],",
+                                "  [",
+                                "    \u001b[32m'aname'\u001b[39m,",
+                                "    \u001b[32m'M'\u001b[39m",
+                                "  ]",
+                                "]"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "b=new Map(a)\r\nb.get(\"name\")"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "\u001b[32m'Alf'\u001b[39m"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "for (var [key, value] of Object.entries(person)) {\r\n    console.log(key + ' ' + value); // \"a 5\", \"b 7\", \"c 9\"\r\n}\r\n\r\nObject.keys(obj).forEach(key => {\r\n    obj[key] = '';\r\n});"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "name Alf",
+                                "aname M",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "ReferenceError",
+                                "message": "obj is not defined",
+                                "stack": "    at <Cell 3> [5, 6]\n    at <Cell 3> [9, 46]\n    at Script.runInContext (node:vm:139:12)\n    at Script.runInNewContext (node:vm:144:17)\n    at Object.runInNewContext (node:vm:298:38)\n    at C (c:\\Users\\AlfredoMaussa\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:113345)\n    at t.execCode (c:\\Users\\AlfredoMaussa\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:114312)\n    at k.<anonymous> (c:\\Users\\AlfredoMaussa\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:142156)\n    at k.emit (node:events:527:28)\n    at k.emit (node:domain:475:12)"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// Source:\r\n// https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Object/entries\r\nvar obj = {a: 5, b: 7, c: 9};\r\n// option 1\r\nfor (var [key, value] of Object.entries(obj)) {\r\n    console.log(key + ' ' + value); // \"a 5\", \"b 7\", \"c 9\"\r\n}\r\n\r\n// option 2\r\nObject.entries(obj).forEach(([key, value]) => {\r\n    console.log(key + ' ' + value); // \"a 5\", \"b 7\", \"c 9\"\r\n});\r\n\r\nvar map = new Map(Object.entries(obj));\r\nmap.forEach(function(value,key) {\r\n    console.log(key + ' ' + value); // \"a 5\", \"b 7\", \"c 9\"\r\n}\r\n\r\n)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "a 5",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "obj"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "text/plain",
+                            "value": [
+                                "{",
+                                "  a: \u001b[33m5\u001b[39m,",
+                                "  b: \u001b[33m7\u001b[39m,",
+                                "  c: \u001b[33m9\u001b[39m",
+                                "}"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "Object.keys(obj).forEach(function (key) {\r\n    console.log(key + \" \" + obj[key]); // \"a 5\", \"b 7\", \"c 9\"\r\n  });\r\n  "
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "a 5",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
