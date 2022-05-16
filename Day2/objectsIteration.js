@@ -21,3 +21,8 @@ map.forEach(function (value, key) {
 Object.keys(obj).forEach(function (key) {
   console.log(key + " " + obj[key]); // "a 5", "b 7", "c 9"
 });
+
+// option 5
+for (let key in obj) {
+  console.log(obj[key]);
+  };
