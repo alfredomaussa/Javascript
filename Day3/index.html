@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="person.display()">as</button>
+    <h1 id="demo">asfrd</h1>
+    <script>
+        const person = {
+            firstName: "John",
+            lastName: "Doe",
+            display: function () {
+                let x = document.getElementById("demo");
+                x.innerHTML = this.firstName + " " + this.lastName;
+                console.log(this);
+            }
+        }
+
+
+        setTimeout(person.display, 3000);
+    </script>
+</body>
+
+</html>

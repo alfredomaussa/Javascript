@@ -13,5 +13,8 @@
 * [React JS bootcamp 8h](https://youtu.be/6Jfk8ic3KVk)
 * [Unpack](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 * [50+ Project Ideas For JavaScript Learners, From Beginner To Advanced!](https://twitter.com/Amit_T18/status/1525069603944034304?s=20&t=fqf9rynt9jsXM1bE-F7w8w)
+## projects examples
+[I made around 15 projects in 6 months and got a job as a Web Developer!](https://twitter.com/tanishka__yadav/status/1525814072415240193?s=20&t=yAvNFJhVsEjiPVKt7zxtZQ)
+[7 lugares donde subir tu nivel de programación! 🚀](https://twitter.com/Open_Bootcamp/status/1523740030774169601?s=20&t=oH0ynGff_xdL3D8L-CO22Q)
 
 # Day 2
