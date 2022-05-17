@@ -1,0 +1,164 @@
+<!-- Credits -->
+<!-- https://youtu.be/wCwKkT1P7vY -->
+<!-- https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .color-field {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .tools {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        canvas {
+            background: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="480" height="320"></canvas>
+
+    <div class="tools">
+        <button onclick="undoCanvas();">Undo</button>
+        <button onclick="clearCanvas();">Clear</button>
+        <div class="color-field" style="background-color: red;" onclick="colorDraw='red'"></div>
+        <div class="color-field" style="background-color: green;" onclick="colorDraw='green'"></div>
+        <div class="color-field" style="background-color: blue;" onclick="colorDraw='blue'"></div>
+
+        <input oninput="colorDraw=this.value" type="color">
+        <input onchange="drawWidth=0.2*this.value" type="range" min="1" max="100" value="10">
+    </div>
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        // ctx.translate(0.5, 0.5);
+        ctx.imageSmoothingEnabled = true;
+        var startBackgroundColor = "white";
+        ctx.fillStyle = startBackgroundColor;
+        var colorDraw = "black";
+        var drawWidth = "10px";
+        var mouseisdown;
+        var restoreArray = [];
+
+        canvas.addEventListener("mousedown", start, false);
+        canvas.addEventListener("mousemove", draw, false);
+        canvas.addEventListener("mouseup", stop, false);
+        canvas.addEventListener("mouseout", stop, false);
+
+        canvas.addEventListener("touchstart", start, false);
+        canvas.addEventListener("touchmove", draw, false);
+        // canvas.addEventListener("touchend", stop, false);
+        // canvas.addEventListener("touchout", stop, false);
+
+        // https://stackoverflow.com/a/59011376/13636459
+        canvas.addEventListener("pointerdown", startP, false);
+        canvas.addEventListener("pointermove", drawP, false);
+        canvas.addEventListener("pointerup", stopP, false);
+
+        function start(e) {
+            mouseisdown = true;
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            e.preventDefault();
+        }
+        function draw(e) {
+            if (mouseisdown) {
+                // ctx.beginPath();
+                // ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+                ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+                ctx.strokeStyle = colorDraw;
+                ctx.lineWidth=drawWidth;
+                // ctx.lineWidth = 10 * e.pressure;
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+                ctx.stroke();
+                // ctx.closePath();
+                // console.log(e.pressure);
+            }
+            e.preventDefault();
+        }
+        function stop(e) {
+            if (mouseisdown) {
+                mouseisdown=false;
+                ctx.stroke();
+                ctx.closePath();
+                e.preventDefault();
+                // 
+                restoreArray.push(ctx.getImageData(0, 0, canvas.width, canvas.height))
+                console.log(restoreArray);
+            }
+        }
+        function startP(e) {
+            if (e.pointerType=="mouse") return
+            // if (pointerType=="pen")
+            mouseisdown = true;
+            // ctx.beginPath();
+            // ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            // e.preventDefault();
+        }
+        function drawP(e) {
+            if (e.pointerType=="mouse") return
+
+            if (mouseisdown) {
+                ctx.beginPath();
+                ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+                ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+                ctx.strokeStyle = colorDraw;
+                // ctx.lineWidth=drawWidth;
+                ctx.lineWidth = 10 * e.pressure;
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+                ctx.stroke();
+                ctx.closePath();
+                console.log(e.pressure);
+                // e.preventDefault();
+            }
+        }
+        function stopP(e) {
+            if (e.pointerType=="mouse") return
+            if (mouseisdown) {
+                mouseisdown=false;
+                // ctx.stroke();
+                // ctx.closePath();
+                // e.preventDefault();
+                // 
+                restoreArray.push(ctx.getImageData(0, 0, canvas.width, canvas.height))
+                console.log(restoreArray);
+            }
+        }
+
+        function clearCanvas() {
+            ctx.fillStyle = startBackgroundColor;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // ctx.clearRect(0,0,canvas.with,canvas.height);
+        }
+
+        function undoCanvas() {
+
+            clearCanvas();
+            restoreArray.pop()
+            if (restoreArray.length) {
+                ctx.putImageData(restoreArray[restoreArray.length - 1], 0, 0);
+            }
+        }
+    </script>
+</body>
+
+</html>

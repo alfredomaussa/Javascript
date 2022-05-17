@@ -181,3 +181,94 @@ window.addEventListener("load", hello);
 document.getElementById("btn").addEventListener("click", hello);
 // this->btn
 ```
+
+Other:
+[The Difference Between Regular Functions and Arrow Functions](https://twitter.com/deetwts/status/1525020208204611584?s=20&t=MV2KKUlNKigQFZYq15MAIA)
+# Favorites shorthand snippets
+Credits: [25+ JavaScript Shorthand Coding Techniques](https://www.sitepoint.com/shorthand-javascript-techniques/)
+```javascript
+const answer = x > 10 ? "greater than 10" : "less than 10";
+```
+```javascript
+if (variable1 !== null || variable1 !== undefined || variable1 !== '') {
+     let variable2 = variable1;
+}
+// 
+const variable2 = variable1  || 'new';
+```
+```javascript
+const fruits = ['mango', 'peach', 'banana'];
+for (let i = 0; i < fruits.length; i++)
+// 
+for (let fruit of fruits)
+// 
+[2, 5, 9].forEach(logArrayElements);
+```
+```javascript
+function volume(l, w, h) {
+  if (w === undefined)
+    w = 3;
+  if (h === undefined)
+    h = 4;
+  return l * w * h;
+}
+// 
+volume = (l, w = 3, h = 4 ) => (l * w * h);
+```
+```javascript
+const welcome = `You have logged in as ${first} ${last}`;
+
+const db = `http://${host}:${port}/${database}`;
+```
+```javascript
+// joining arrays
+const odd = [1, 3, 5];
+const nums = [2 ,4 , 6].concat(odd);
+// 
+// joining arrays
+const odd = [1, 3, 5];
+const nums = [2 ,4 , 6].concat(odd);
+// joining arrays
+const odd = [1, 3, 5];
+const nums = [2 ,4 , 6].concat(odd);
+// 
+const arr = [1, 2, 3, 4];
+const arr2 = [...arr];
+```
+```javascript
+const pets = [
+  { type: 'Dog', name: 'Max'},
+  { type: 'Cat', name: 'Karl'},
+  { type: 'Dog', name: 'Tommy'},
+]
+
+function findDog(name) {
+  for(let i = 0; i<pets.length; ++i) {
+    if(pets[i].type === 'Dog' && pets[i].name === name) {
+      return pets[i];
+    }
+  }
+}
+// 
+const pets = [
+  { type: 'Dog', name: 'Max'},
+  { type: 'Cat', name: 'Karl'},
+  { type: 'Dog', name: 'Tommy'},
+]
+
+function findDog(name) {
+  for(let i = 0; i<pets.length; ++i) {
+    if(pets[i].type === 'Dog' && pets[i].name === name) {
+      return pets[i];
+    }
+  }
+}
+```
+
+``` javascript
+let fname = { firstName : 'Black' };
+let lname = { lastName : 'Panther'}
+let full_names = Object.assign(fname, lname);
+// 
+let full_names = Object.assign(fname, lname);
+```
