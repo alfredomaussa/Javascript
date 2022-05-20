@@ -18,3 +18,7 @@
 [7 lugares donde subir tu nivel de programación! 🚀](https://twitter.com/Open_Bootcamp/status/1523740030774169601?s=20&t=oH0ynGff_xdL3D8L-CO22Q)
 
 # Day 2
+
+# Day 7
+stack:
+replicate this [canvas simulation](https://29a.ch/sandbox/2010/box2d2/test.html)
