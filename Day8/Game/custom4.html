@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        canvas {
+            background: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="960" height="640"></canvas>
+
+    <script>
+        // 
+        var canvas = document.getElementById("myCanvas");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        var ctx = canvas.getContext("2d");
+        // credit:
+        // https://stackoverflow.com/a/60097139/13636459
+        const gravity = { x: 0, y: 0.1 };
+        const object = {
+            pos: { x: canvas.width / 2, y: canvas.height - 130 }, // position
+            vel: { x: 1, y: 0 }, // velocity
+            bounce: 0.3,
+            radius: 10,
+            update() {
+                this.vel.x += gravity.x;
+                this.vel.y += gravity.y;
+                this.pos.x += this.vel.x;
+                this.pos.y += this.vel.y;
+            }
+        }
+
+        const lastClick = {
+            x: 0,
+            y: 0,
+            offsetX: 0,
+            offsetY: 0
+        }
+
+        var obstacles = {
+            0: [100, 100, 70, 100],
+            1: [400, 200, 200, 50],
+            2: [600, 70, 200, 50]
+        }
+
+        // JavaScript code goes here
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(object.pos.x, object.pos.y, 10, 0, Math.PI * 2);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
+        }
+        var score = 0;
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackground();
+
+            drawBall();
+
+            // Bouncing x-axis
+            // missing radius padding
+            if (object.pos.x + object.vel.x > canvas.width - object.radius || object.pos.x + object.vel.x < 0 + object.radius) {
+                object.vel.x = -object.vel.x * object.bounce;
+            }
+
+            // Bouncing y-axis
+            // missing radius padding
+            if (object.pos.y + object.vel.y > canvas.height - (object.radius + 50) || object.pos.y + object.vel.y < 0 + object.radius) {
+                object.vel.y = -object.vel.y * object.bounce;
+                if (object.pos.y > canvas.height - (object.radius + 50)) {
+                    object.pos.y += canvas.height - (object.radius + 50) - object.pos.y + object.vel.y;
+                    object.vel.x = 0.99 * object.vel.x;
+
+                    // alert("GAME OVER");
+                    // document.location.reload();
+                    // clearInterval(interval);
+                }
+            }
+
+            for (box in obstacles) {
+                // Top bouncing
+                if (object.pos.y + object.vel.y > obstacles[box][1]
+                && object.pos.y + object.vel.y < obstacles[box][1]+10
+                    // && object.pos.y + object.vel.y < obstacles[box][1]+obstacles[box][3]
+                    && object.pos.x + object.vel.x > obstacles[box][0]
+                    && object.pos.x + object.vel.x < obstacles[box][0]+obstacles[box][2]) {
+                    object.vel.y = -3*object.bounce*Math.abs(object.vel.y);
+                    object.pos.y+=obstacles[box][1]-object.pos.y - object.vel.y;
+                }
+                // Left bouncing
+                if (object.pos.x + object.vel.x > obstacles[box][0]
+                    && object.pos.x + object.vel.x < obstacles[box][0]+obstacles[box][2]
+                    && object.pos.y + object.vel.y>obstacles[box][1]
+                    && object.pos.y + object.vel.y<obstacles[box][1]+obstacles[box][3]){
+                    object.vel.x = -3*object.bounce*Math.abs(object.vel.x);
+                }
+                // // Right bouncing
+                // if (object.pos.x + object.vel.x < obstacles[box][0]
+                //     && object.pos.x + object.vel.x < obstacles[box][0]+obstacles[box][2]
+                //     && object.pos.y + object.vel.y>obstacles[box][1]
+                //     && object.pos.y + object.vel.y<obstacles[box][1]+obstacles[box][3]){
+                //     object.vel.x = 3*object.bounce*Math.abs(object.vel.x);
+                // }
+            }
+
+            console.log(mouseDown);
+            if (mouseDown || spacePressed) {
+                object.vel.x += 0.001 * (lastClick.x - lastClick.offsetX - object.pos.x);
+                object.vel.y += 0.001 * (lastClick.y - lastClick.offsetY - object.pos.y);
+
+                // 
+                ctx.beginPath();
+                ctx.moveTo(object.pos.x, object.pos.y);
+                ctx.lineTo(lastClick.x - lastClick.offsetX, lastClick.y - lastClick.offsetY);
+                ctx.stroke();
+            }
+
+            object.update()
+            drawScore();
+            drawObstacles(obstacles);
+
+
+        }
+
+
+
+        var interval = setInterval(draw, 10);
+
+        // https://stackoverflow.com/a/6434236/13636459
+        myCanvas.addEventListener("mousedown", onClick, false);
+
+        function onClick(e) {
+            var element = myCanvas;
+            var offsetX = 0, offsetY = 0
+            // Este while es solo para calibrar offset del canvas
+            if (element.offsetParent) {
+                do {
+                    offsetX += element.offsetLeft;
+                    offsetY += element.offsetTop;
+                } while ((element = element.offsetParent));
+            }
+            lastClick.x = e.pageX
+            lastClick.y = e.pageY
+            lastClick.offsetX = offsetX
+            lastClick.offsetY = offsetY
+            object.pos.x += 0.01 * (lastClick.x - offsetX - object.pos.x);
+            object.pos.y += 0.01 * (lastClick.y - offsetY - object.pos.y);
+        }
+
+        // 
+        var spacePressed;
+        function keyDownHandler(e) {
+            console.log(e.code);
+            if (e.code == "Space") {
+                spacePressed = true;
+            }
+        }
+
+        function keyUpHandler(e) {
+            if (e.code == "Space") {
+                spacePressed = false;
+            }
+        }
+
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+
+        var mouseDown = 0;
+        document.body.onmousedown = function () {
+            mouseDown = 1;
+        }
+        document.body.onmouseup = function () {
+            mouseDown = 0;
+        }
+
+        function drawScore() {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#0095DD";
+            ctx.fillText("Score: " + score, 8, 20);
+        }
+
+        // draw background
+        function drawBackground() {
+            // Create gradient
+            var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            grd.addColorStop(0, "#0defff");
+            grd.addColorStop(0.25, "#a3f9ff");
+            grd.addColorStop(1, "white");
+            // grd.addColorStop(1, "#85ffb8");
+
+            // Fill with gradient
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.rect(0, canvas.height - 50, canvas.width, 100);
+            ctx.fillStyle = "#084700";
+            ctx.fillRect(0, canvas.height - 50, canvas.width, 100);
+
+            // ctx.fillRect(2,2,3)
+            ctx.stroke();
+        }
+
+
+
+        function drawObstacles(obstacles) {
+            for (let key in obstacles) {
+                // console.log(obstacles[key])
+                ctx.beginPath();
+                ctx.rect(...obstacles[key]);
+                ctx.fillStyle = "white";
+                ctx.fillRect(...obstacles[key]);
+                ctx.stroke();
+            };
+        }
+    </script>
+
+</body>
+
+</html>
