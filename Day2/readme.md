@@ -74,7 +74,7 @@ obj.increment;
 obj.decrement;
 ```
 
-# Construnctor
+# Constructor
 ``` javascript
 function Person(first, last, age, eye) {
   this.firstName = first;

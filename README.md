@@ -22,3 +22,65 @@
 # Day 7
 stack:
 replicate this [canvas simulation](https://29a.ch/sandbox/2010/box2d2/test.html)
+
+# Days 1-10 summary
+## Objects
+* Booleans can be objects (if defined with the new keyword)
+* Numbers can be objects (if defined with the new keyword)
+* Strings can be objects (if defined with the new keyword)
+* Dates are always objects
+* Maths are always objects
+* Regular expressions are always objects
+* Arrays are always objects
+* Functions are always objects
+* Objects are always objects
+
+``` javascript
+//
+let person = "John Doe";
+//
+let person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+//
+const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+```
+
+## constructor
+``` javascript
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eye;
+}
+
+const myFather = new Person("John", "Doe", 50, "blue");
+const myMother = new Person("Sally", "Rally", 48, "green");
+```
+
+### update an object
+``` javascript
+const new_obj = { ...obj, name: { first: 'blah', last: 'ha'} }
+```
+
+### Accesors
+``` javascript
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  language: "en",
+    get lang1() {
+        return this.language.toUpperCase();
+    },
+    set lang2(lang) {
+    this.language = lang.toUpperCase();
+    }
+};
+
+// Display data from the object using a getter:
+document.getElementById("demo").innerHTML = person.lang1;
+person.lang = "abc";
+document.getElementById("demo").innerHTML = person.lang2;
+```
+
+![imagen](Day9/GetSet.PNG)
+
