@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="960" height="640"></canvas>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        var ctx = canvas.getContext("2d");
+        var radius=100
+        var t = [...Array(17).keys()];;
+        var c = (t)=>[Math.cos(2*Math.PI*t/16),Math.sin(2*Math.PI*t/16)];
+        ctx.fillStyle = '#f00';
+        ctx.beginPath();
+        [x,y]=c(0);
+        ctx.moveTo(10*x+100,10*y+100);
+        for (let point in t) {
+            console.log(point);
+                [x,y]=c(point);
+                console.log(radius*x+100,radius*y+100);
+                ctx.lineTo(radius*x+100,radius*y+100);
+            }
+        ctx.closePath();
+        ctx.fill();
+    </script>
+</body>
+
+</html>

@@ -62,6 +62,13 @@ const myMother = new Person("Sally", "Rally", 48, "green");
 const new_obj = { ...obj, name: { first: 'blah', last: 'ha'} }
 ```
 
+### pass argument
+``` javascript
+a={
+    name:"al",
+    val(x){return "Hola"+x}
+}
+```
 ### Accesors
 ``` javascript
 const person = {
@@ -84,3 +91,107 @@ document.getElementById("demo").innerHTML = person.lang2;
 
 ![imagen](Day9/GetSet.PNG)
 
+
+## Class
+``` javascript
+class Car {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+  }
+  age() {
+    let date = new Date();
+    return date.getFullYear() - this.year;
+  }
+}
+
+let myCar = new Car("Ford", 2014);
+```
+### Class with arguments
+``` javascript 
+class Car {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+  }
+  age(x) {
+    return x - this.year;
+  }
+}
+```
+
+## inherance
+``` javascript
+class Car {
+  constructor(brand) {
+    this.carname = brand;
+  }
+  present() {
+    return 'I have a ' + this.carname;
+  }
+}
+
+class Model extends Car {
+  constructor(brand, mod) {
+    super(brand);
+    this.model = mod;
+  }
+  show() {
+    return this.present() + ', it is a ' + this.model;
+  }
+}
+
+let myCar = new Model("Ford", "Mustang");
+```
+
+### accessors
+``` javascript
+class Car {
+  constructor(brand) {
+    this.carname = brand;
+  }
+  get cnam() {
+    return this.carname;
+  }
+  set cnam(x) {
+    this.carname = x;
+  }
+}
+```
+
+### Hoising
+class declarations are not hoisted.
+
+### Stactic method
+``` javascript
+class Car {
+  constructor(name) {
+    this.name = name;
+  }
+  static hello() {
+    return "Hello!!";
+  }
+}
+
+let myCar = new Car("Ford");
+
+// You can call 'hello()' on the Car Class:
+document.getElementById("demo").innerHTML = Car.hello();
+
+// But NOT on a Car Object:
+// document.getElementById("demo").innerHTML = myCar.hello();
+// this will raise an error.
+```
+This way, you can...
+``` javascript
+class Car {
+  constructor(name) {
+    this.name = name;
+  }
+  static hello(x) {
+    return "Hello " + x.name;
+  }
+}
+let myCar = new Car("Ford");
+document.getElementById("demo").innerHTML = Car.hello(myCar);
+```
